@@ -31,16 +31,29 @@ export default function App() {
     setSections([]);
     setShowResult(true);
 
-    const formData = new FormData();
-    formData.append('pdf', selectedFile);
-    if (userGoal.trim()) {
-      formData.append('goal', userGoal.trim());
+    let pdfBase64;
+    try {
+      pdfBase64 = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(selectedFile);
+      });
+    } catch {
+      setError('Nie udało się odczytać pliku PDF');
+      setIsAnalyzing(false);
+      setShowResult(false);
+      return;
     }
 
     try {
       const response = await fetch(API_URL, {
         method: 'POST',
-        body: formData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          pdfBase64,
+          goal: userGoal.trim() || undefined,
+        }),
       });
 
       if (!response.ok) {
