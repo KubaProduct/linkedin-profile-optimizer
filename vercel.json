@@ -1,5 +1,4 @@
 {
-  "rootDirectory": "client",
   "functions": {
     "api/analyze.js": {
       "maxDuration": 60
