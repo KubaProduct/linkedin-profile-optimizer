@@ -119,12 +119,14 @@ export default function App() {
             </span>
           </h1>
 
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
-            Zaniedbałeś swój profil na LinkedIn a nadal chcesz być sexy dla rekruterów?
-            <br />
-            Nie ma problemu! Wrzuć tutaj swój profil LinkedIn w formacie PDF i otrzymaj
-            spersonalizowane sugestie ulepszeń oparte na analizie AI.
-          </p>
+          {!showResult && (
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
+              Zaniedbałeś swój profil na LinkedIn a nadal chcesz być sexy dla rekruterów?
+              <br />
+              Nie ma problemu! Wrzuć obecny profil LinkedIn w formacie PDF i otrzymaj
+              spersonalizowane sugestie ulepszeń oparte na analizie AI.
+            </p>
+          )}
         </header>
 
         {/* Main content */}
@@ -155,7 +157,7 @@ export default function App() {
                   rows={2}
                   placeholder="Np. Chcę być postrzegany jako AI Product Manager, szukam pracy w startupach, chcę podkreślić doświadczenie w Agile..."
                   className="w-full bg-gray-800/60 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200
-                    placeholder:text-gray-600 focus:outline-none focus:border-linkedin-blue/60 focus:bg-gray-800
+                    placeholder:text-gray-500 focus:outline-none focus:border-linkedin-blue/60 focus:bg-gray-800
                     resize-none transition-colors duration-200"
                 />
               </div>
